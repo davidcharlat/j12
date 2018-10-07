@@ -2,7 +2,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "libft.h"
 
 #define BUFSIZE 4096
 

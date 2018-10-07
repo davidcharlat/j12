@@ -1,11 +1,13 @@
 SRCFILES = ft_tail \
 		   print_file \
-		   print_err
+		   print_err \
+		   ft_strcmp \
+		   ft_atoi
 TARGET = ft_tail
 
 all:
-	gcc -o $(TARGET) $(addsuffix .c, $(SRCFILES)) libft.a
-		
+	gcc -o $(TARGET) $(addsuffix .c, $(SRCFILES))
+
 clean:
 	rm -f $(addsuffix .o, $(SRCFILES))
 	

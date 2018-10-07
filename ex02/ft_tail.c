@@ -1,6 +1,7 @@
 #include <unistd.h>
-#include "libft.h"
 
+int	ft_strcmp(char *s1, char *s2);
+int	ft_atoi(char *str);
 int print_1file_fr_end (char *file, int num);
 int print_1file_fr_start (char *file, int num);
 int print_files_fr_end (char *file, int num);

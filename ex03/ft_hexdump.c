@@ -1,8 +1,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
-#include "libft.h"
 
+int	ft_strcmp(char *s1, char *s2);
 int	print_err (int errnocpy, char *pb_src);
 int	ft_putchar_non_printable(char c);
 int	ft_putchar_hexbase(unsigned char nbr);

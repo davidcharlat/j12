@@ -1,11 +1,12 @@
 SRCFILES = ft_hexdump \
-			print
+			print \
+			ft_strcmp \
 
 TARGET = ft_hexdump
 
 all:
-	gcc -o $(TARGET) $(addsuffix .c, $(SRCFILES)) libft.a
-		
+	gcc -o $(TARGET) $(addsuffix .c, $(SRCFILES)) 
+
 clean:
 	rm -f $(addsuffix .o, $(SRCFILES))
 	
