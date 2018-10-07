@@ -1,30 +1,20 @@
 #include <unistd.h>
 
-int	test_star (char *pb_src)
+int	replace_buf (char buf[16], char precbuf[16])
 {
-	int test;
+	int	i;
 	
-	test = 0;
-	while (*pb_src)
-	{
-		if (*(pb_src++) == '*')
-			test = 1;
-	}
-	return (test);
+	i = 0;
+	while (i < 16)
+		precbuf[i] = buf[i++];
+	return (0);
 }
 
 int	print_err (int errnocpy, char *pb_src)
 {
-	int		star;
-	
-	star = test_star (pb_src);
 	write (2, "hexdump: ", 9);
-	if (star)
-		write (2, "'", 1);
 	while (*pb_src)
 		write (2, (pb_src++), 1);
-	if (star)
-		write (2, "'", 1);
 	write (2, ": ", 2);
 	if (errnocpy == 2)
 		write (2, "No such file or directory\n", 26);

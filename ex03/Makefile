@@ -1,6 +1,6 @@
 SRCFILES = ft_hexdump \
-			print_err
- 
+			print
+
 TARGET = ft_hexdump
 
 all:
