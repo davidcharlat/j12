@@ -4,6 +4,7 @@ SRCFILES = ft_last \
 			fill_line \
 			print_time_begins \
 			size_line \
+			fill_hour_shutdown
 
 TARGET = ft_last
 

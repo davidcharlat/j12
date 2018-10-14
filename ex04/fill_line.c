@@ -33,6 +33,33 @@ void	fill_endline_logout (int tmp1, int tmp2, char line[77])
 	}
 }
 
+void	fill_line_shutdown (struct utmp login, struct utmp logout, char line[77])
+{
+	int		i;
+	char	reboot[] = "system boot";
+	
+	i = 0;
+	if (!ft_strcmp("reboot", login.ut_user))
+	{
+		while (i < 11)
+			line [i + 9] = reboot[i++];
+		i = 0;
+		while (i < 16 && login.ut_host[i])
+			line [i + 22] = login.ut_host[i++];
+	}
+	else
+	{
+		while (i < 12 && login.ut_line[i])
+			line [i + 9] = login.ut_line[i++];
+		i = 0;
+		while (i < 16 && login.ut_id[i])
+			line [i + 22] = login.ut_id[i++];
+	}
+	fill_time ((int32_t)login.ut_time, line);
+	fill_endline_logout ((int)login.ut_time, (int)logout.ut_time, line);
+	fill_hour_shutdown ((int)logout.ut_time, login, line);
+}
+
 void	fill_line_logout (struct utmp login, struct utmp logout, char line[77])
 {
 	int i;
@@ -42,20 +69,25 @@ void	fill_line_logout (struct utmp login, struct utmp logout, char line[77])
 	i = 0;
 	while (i < 8 && login.ut_user[i])
 		line [i] = login.ut_user[i++];
-	i = 0;
-	while (i < 12 && login.ut_line[i])
-		line [i + 9] = login.ut_line[i++];
-	i = 0;
-	while (i < 16 && login.ut_id[i])
-		line [i + 22] = login.ut_id[i++];
-	fill_time ((int32_t)login.ut_time, line);
-	fill_endline_logout ((int)login.ut_time, (int)logout.ut_time, line);
-	line [56] = '-';
-	line [60] = ':';
-	line [62] = (tmp / 60 % 10) + '0';
-	line [61] = (tmp / 600 % 6) + '0';
-	line [59] = (tmp / 3600 % 24) % 10 + '0';
-	line [58] = (tmp / 3600 % 24) / 10 + '0';
+	if (!ft_strcmp("shutdown", logout.ut_user))
+		fill_line_shutdown (login, logout, line);
+	else
+	{
+		i = 0;
+		while (i < 12 && login.ut_line[i])
+			line [i + 9] = login.ut_line[i++];
+		i = 0;
+		while (i < 16 && login.ut_id[i])
+			line [i + 22] = login.ut_id[i++];
+		fill_time ((int32_t)login.ut_time, line);
+		fill_endline_logout ((int)login.ut_time, (int)logout.ut_time, line);
+		line [56] = '-';
+		line [60] = ':';
+		line [62] = (tmp / 60 % 10) + '0';
+		line [61] = (tmp / 600 % 6) + '0';
+		line [59] = (tmp / 3600 % 24) % 10 + '0';
+		line [58] = (tmp / 3600 % 24) / 10 + '0';
+	}
 }
 
 void	fill_endline_reboot (struct utmp login, char line[77])
